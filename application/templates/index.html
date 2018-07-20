@@ -14,12 +14,16 @@
 {% block content %}
     {{util.flashed_messages(dismissible=True)}}
     <div class="container">
-        <h1>Hello, world!</h1>
+
+        <h1>YTLA</h1>
+
+        {{ wtf.quick_form(form, button_map={'submit_button': 'primary'}) }}
 
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
-                    <div class='input-group date' id='dtpicker'>
+                    <label for="dtpicker">Begin Time:</label>
+                    <div class='input-group date dtpicker'>
                         <input type='text' class="form-control" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -29,14 +33,20 @@
             </div>
         </div>
 
-        <h2>This is the sample form (basic)</h2>
-        {{ wtf.quick_form(form, button_map={'submit_button': 'primary'}) }}
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <label for="dtpicker">End Time:</label>
+                    <div class='input-group date dtpicker'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <h2>The same form, inline</h2>
-        {{ wtf.quick_form(form, form_type='inline', button_map={'submit_button': 'primary'}) }}
-
-        <h2>And as a horizontal form</h2>
-        {{ wtf.quick_form(form, form_type='horizontal', button_map={'submit_button': 'primary'})}}
     </div>
 {% endblock %}
 
@@ -46,7 +56,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('#dtpicker').datetimepicker();
+            $('.dtpicker').datetimepicker();
         });
     </script>
 {% endblock %}

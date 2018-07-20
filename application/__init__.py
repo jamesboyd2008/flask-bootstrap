@@ -16,7 +16,8 @@ class TelephoneForm(Form):
 
 
 class ExampleForm(Form):
-    field1 = TextField('First Field', description='This is field one.')
+    # field1 = TextField('First Field', description='This is field one.')
+    field1 = TextField('Select Data')
     # field2 = TextField('Second Field', description='This is field two.',
     #                    validators=[Required()])
     # hidden_field = HiddenField('You cannot see this', description='Nope')
@@ -47,7 +48,7 @@ class ExampleForm(Form):
 class DateTimePicker(Form):
     """datetimepicker http://eonasdan.github.io/bootstrap-datetimepicker/
     """
-    timestamp = DateField(id='dtpicker')
+    timestamp = DateField(id='dtpicker', label='Beginagain:')
 
 
 def create_app(configfile=None):
