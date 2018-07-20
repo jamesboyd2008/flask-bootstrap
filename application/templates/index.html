@@ -16,36 +16,9 @@
     <div class="container">
 
         <h1>YTLA</h1>
+        <h3>Search:</h3>
 
         {{ wtf.quick_form(form, button_map={'submit_button': 'primary'}) }}
-
-        <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <label for="dtpicker">Begin Time:</label>
-                    <div class='input-group date dtpicker'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <label for="dtpicker">End Time:</label>
-                    <div class='input-group date dtpicker'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 {% endblock %}
@@ -56,7 +29,12 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('.dtpicker').datetimepicker();
+            $('.begin_dtpicker').datetimepicker();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.end_dtpicker').datetimepicker();
         });
     </script>
 {% endblock %}

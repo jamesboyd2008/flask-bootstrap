@@ -4,7 +4,8 @@ from flask_appconfig import AppConfig
 from flask_wtf import Form, RecaptchaField
 from flask_wtf.file import FileField
 from wtforms import TextField, HiddenField, ValidationError, RadioField,\
-    BooleanField, SubmitField, IntegerField, FormField, validators, DateField
+    BooleanField, SubmitField, IntegerField, FormField, validators, DateField,\
+    SelectField
 from wtforms.validators import Required
 
 
@@ -17,7 +18,13 @@ class TelephoneForm(Form):
 
 class ExampleForm(Form):
     # field1 = TextField('First Field', description='This is field one.')
-    field1 = TextField('Select Data')
+    x_pol = SelectField(label='X Pol Parameters', choices=[('a', 'apes'), ('b', 'bananas'), ('c', 'crabs')])
+    y_pol = SelectField(label='Y Pol Parameters', choices=[('a', 'apes'), ('b', 'bananas'), ('c', 'crabs')])
+    gen_sys = SelectField(label='General System Parameters', choices=[('a', 'apes'), ('b', 'bananas'), ('c', 'crabs')])
+
+    begin = DateField(id='begin_dtpicker', label='Begin:')
+    end = DateField(id='end_dtpicker', label='End:')
+
     # field2 = TextField('Second Field', description='This is field two.',
     #                    validators=[Required()])
     # hidden_field = HiddenField('You cannot see this', description='Nope')
@@ -39,17 +46,16 @@ class ExampleForm(Form):
     #
     # ff = FileField('Sample upload')
 
-    submit_button = SubmitField('Submit Form')
+    submit_button = SubmitField('Send')
 
 
     def validate_hidden_field(form, field):
         raise ValidationError('Always wrong')
 
-class DateTimePicker(Form):
-    """datetimepicker http://eonasdan.github.io/bootstrap-datetimepicker/
-    """
-    timestamp = DateField(id='dtpicker', label='Beginagain:')
-
+# class DateTimePicker(Form):
+#     """datetimepicker http://eonasdan.github.io/bootstrap-datetimepicker/
+#     """
+#     timestamp = DateField(id='dtpicker', label='Beginagain:')
 
 def create_app(configfile=None):
     app = Flask(__name__)
@@ -60,8 +66,6 @@ def create_app(configfile=None):
 
     # in a real app, these should be configured through Flask-Appconfig
     app.config['SECRET_KEY'] = 'devkey'
-    app.config['RECAPTCHA_PUBLIC_KEY'] = \
-        '6Lfol9cSAAAAADAkodaYl9wvQCwBMr3qGR_PPHcw'
 
     @app.route('/', methods=('GET', 'POST'))
     def index():
@@ -75,9 +79,7 @@ def create_app(configfile=None):
         # flash('different message', 'different')
         # flash('uncategorized message')
 
-        dtpicker = DateTimePicker()
-
-        return render_template('index.html', form=form, dtpicker=dtpicker)
+        return render_template('index.html', form=form)
 
     return app
 
