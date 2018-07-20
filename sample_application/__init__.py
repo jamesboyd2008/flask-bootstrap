@@ -4,7 +4,7 @@ from flask_appconfig import AppConfig
 from flask_wtf import Form, RecaptchaField
 from flask_wtf.file import FileField
 from wtforms import TextField, HiddenField, ValidationError, RadioField,\
-    BooleanField, SubmitField, IntegerField, FormField, validators
+    BooleanField, SubmitField, IntegerField, FormField, validators, DateField
 from wtforms.validators import Required
 
 
@@ -44,6 +44,11 @@ class ExampleForm(Form):
     def validate_hidden_field(form, field):
         raise ValidationError('Always wrong')
 
+class DateTimePicker(Form):
+    """datetimepicker http://eonasdan.github.io/bootstrap-datetimepicker/
+    """
+    timestamp = DateField(id='dtpicker')
+
 
 def create_app(configfile=None):
     app = Flask(__name__)
@@ -61,14 +66,17 @@ def create_app(configfile=None):
     def index():
         form = ExampleForm()
         form.validate_on_submit()  # to get error messages to the browser
-        flash('critical message', 'critical')
-        flash('error message', 'error')
-        flash('warning message', 'warning')
-        flash('info message', 'info')
-        flash('debug message', 'debug')
-        flash('different message', 'different')
-        flash('uncategorized message')
-        return render_template('index.html', form=form)
+        # flash('critical message', 'critical')
+        # flash('error message', 'error')
+        # flash('warning message', 'warning')
+        # flash('info message', 'info')
+        # flash('debug message', 'debug')
+        # flash('different message', 'different')
+        # flash('uncategorized message')
+
+        dtpicker = DateTimePicker()
+
+        return render_template('index.html', form=form, dtpicker=dtpicker)
 
     return app
 
